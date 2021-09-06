@@ -1,5 +1,4 @@
 
-
 terraform {
   required_providers {
     aws = {
@@ -256,6 +255,7 @@ resource "aws_instance" "cambium-nw-helloworld-flask-app" {
     instance_type = "t2.large"
     security_groups = [ aws_security_group.cambium-nw-allow-access-inside.id ]
     subnet_id = aws_subnet.cambium-nw-subnet["private-sub-1"].id
+    depends_on = [ aws_nat_gateway.cambium-nw-nat]
     user_data = <<-EOF
         #!/bin/bash
         yum install docker git -y
@@ -277,4 +277,3 @@ resource "aws_lb_target_group_attachment" "cambium-nw-target-group-attachment" {
   target_id = aws_instance.cambium-nw-helloworld-flask-app.id
   port             = 5000
 }
-
