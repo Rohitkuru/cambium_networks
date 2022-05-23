@@ -19,7 +19,7 @@ provider "aws" {
 
 locals {
 
-  tag_name = "cambium-nw-"
+  tag_name = "aws-demo-infra"
 }
 
 
